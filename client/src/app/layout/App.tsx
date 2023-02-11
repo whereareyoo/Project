@@ -18,12 +18,14 @@ import { getCookie } from "../util/util";
 import agent from "../api/agent";
 import LoadingComponents from "./LoadingComponents";
 import CheckoutPage from "../../features/checkouts/CheckoutPage";
+import { useAppDispatch } from "../store/ConfigureStore";
+import { setBasket } from "../../features/basket/BasketSlice";
 
 
 
 function App() 
 {
-  const {setBasket} = useStoreContext();
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => 
@@ -32,7 +34,7 @@ function App()
     if (buyerId)
     {
       agent.Basket.get()
-        .then(basket => setBasket(basket))
+        .then(basket => dispatch(setBasket(basket)))
         .catch(error => console.log(error))
         .finally(() => setLoading(false));
     }
@@ -40,7 +42,7 @@ function App()
     {
       setLoading(false);
     }
-  }, [setBasket])
+  }, [dispatch])
 
 
   const [darkMode, setDarkMode] = useState(false);
