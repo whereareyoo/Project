@@ -19,9 +19,9 @@ export const signInUser = createAsyncThunk<User, FieldValues>(
     async (data, thunkAPI) => {
         try
         {
-            const user = await agent.Account.login(data);
-            //const {basket, ...user} = userDto;
-            //if (basket) thunkAPI.dispatch(setBasket(basket));
+            const userDto = await agent.Account.login(data);
+            const {basket, ...user} = userDto;
+            if (basket) thunkAPI.dispatch(setBasket(basket));
             localStorage.setItem('user', JSON.stringify(user));
             return user;
         }
@@ -38,9 +38,9 @@ export const fetchCurrentUser = createAsyncThunk<User>(
         thunkAPI.dispatch(setUser(JSON.parse(localStorage.getItem('user')!)));
         try
         {
-            const user = await agent.Account.currentUser();
-            //const {basket, ...user} = userDto;
-            //if (basket) thunkAPI.dispatch(setBasket(basket));
+            const userDto = await agent.Account.currentUser();
+            const {basket, ...user} = userDto;
+            if (basket) thunkAPI.dispatch(setBasket(basket));
             localStorage.setItem('user', JSON.stringify(user));
             return user;
         }

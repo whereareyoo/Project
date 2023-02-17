@@ -26,7 +26,7 @@ export default function Register() {
     {
         if (errors)
         {
-            errors.array.forEach((error : string) => {
+            errors.forEach((error : string) => {
                 if (error.includes('Password'))
                 {
                     setError('password',{message: error})
