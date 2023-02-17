@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
@@ -74,11 +75,22 @@ namespace API.Controllers
 
         private async Task<Basket> RetrieveBasket()
         {
+            // if (string.IsNullOrEmpty(buyerId))
+            // {
+            //     Response.Cookies.Delete(buyerId);
+            //     return null;
+            // }
+
             return await _context.Baskets
                 .Include(i => i.Items)
                 .ThenInclude(p => p.Product)
                 .FirstOrDefaultAsync(x => x.BuyerId == Request.Cookies["buyerId"]);
         }
+
+        // private string GetBuyerId()
+        // {
+        //     return User.Identity?.Name ?? Request.Cookies["buyerId"];
+        // }
 
         private Basket CreateBasket()
         {
@@ -108,6 +120,5 @@ namespace API.Controllers
                 }).ToList()
             };
         }
-
     }
 }
