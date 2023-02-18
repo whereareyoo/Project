@@ -93,7 +93,7 @@ namespace API.Controllers
         {
             if (string.IsNullOrEmpty(buyerId))
             {
-                Response.Cookies.Delete(buyerId);
+                Response.Cookies.Delete("buyerId");
                 return null;
             }
 
