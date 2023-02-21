@@ -6,6 +6,8 @@ import { RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './app/store/ConfigureStore';
 import { router } from './app/router/Routes';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 //import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(
